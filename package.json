@@ -40,7 +40,9 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom --verbose --coverage",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -b gh-pages"
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",
@@ -55,6 +57,7 @@
     "chai-as-promised": "^7.1.1",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
+    "gh-pages": "^1.1.0",
     "jest": "^21.2.1",
     "jest-enzyme": "^4.0.0",
     "jsdom": "^11.3.0",
@@ -69,5 +72,6 @@
   },
   "resolutions": {
     "react-scripts-ts/jest": "^21.2.1"
-  }
+  },
+  "homepage": "https://t0rr3sp3dr0.github.io/IF687-WebApplication/"
 }
