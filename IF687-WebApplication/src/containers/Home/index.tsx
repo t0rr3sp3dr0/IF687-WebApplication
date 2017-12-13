@@ -4,6 +4,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { emptyP } from '../../util/decorators';
+import * as request from 'request-promise';
+
+interface S {
+    user: string | null;
+}
 
 interface D {
     userAction: (payload: string) => void;
@@ -46,12 +51,14 @@ const styles: {
     },
 };
 
-class Home extends React.Component<D & P> {
+class Home extends React.Component<S & D & P> {
     public static contextTypes?: PropTypes.ValidationMap<{}> = {
         router: PropTypes.object.isRequired,
     };
 
     render(): JSX.Element | null | false {
+        const { user } = this.props;
+
         return (
             <div style={styles.margin}>
                 <Card style={styles.center}>
@@ -74,7 +81,22 @@ class Home extends React.Component<D & P> {
                                 </i>
                             )}
                             onClick={() => {
-                                this.context.router.history.push('/game');
+                                if (user !== null && user.trim().length > 0) {
+                                    request({
+                                        method: 'POST',
+                                        uri: 'http://67.207.87.198:8000/api/enterRoom/',
+                                        body: {
+                                            userName: user!,
+                                        },
+                                        json: true,
+                                    })
+                                        .then(() => {
+                                            this.context.router.history.push('/game');
+                                        })
+                                        .catch(error => {
+                                            alert(error.error.messageError);
+                                        });
+                                }
                             }}
                         />
                     </CardActions>
@@ -84,8 +106,10 @@ class Home extends React.Component<D & P> {
     }
 }
 
-export default emptyP(connect<void, D, P>(
-    null,
+export default emptyP(connect<S, D, P>(
+    (store: S): S => ({
+        user: store.user,
+    }),
     (dispatch): D => ({
         userAction: (payload: string) => dispatch({
             type: 'USER_ACTION',

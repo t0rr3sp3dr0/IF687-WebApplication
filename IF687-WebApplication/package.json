@@ -13,6 +13,7 @@
     "@types/react-router-dom": "^4.0.8",
     "@types/redux-logger": "^3.0.4",
     "@types/request": "^2.0.3",
+    "@types/request-promise": "^4.1.39",
     "aws-sdk": "^2.149.0",
     "axios": "^0.17.0",
     "firebase": "^4.4.0",
@@ -32,6 +33,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "request": "^2.83.0",
+    "request-promise": "^4.2.2",
     "swagger-client": "^3.2.1"
   },
   "scripts": {
