@@ -30,7 +30,7 @@ const styles: {
 
 // noinspection TsLint
 const route = (path: string, Component: React.ComponentType<RouteComponentProps<{}> | {}>): React.ReactNode => (
-    <Route exact={true} path={path} component={Component} />
+    <Route exact={true} path={process.env.PUBLIC_URL + path} component={Component} />
 );
 
 class App extends React.Component<P> {
